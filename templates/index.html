@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block scripts %}
+	{{ super() }}
+	<script type="text/javascript" src="static/scripts.js"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="jumbotron text-center">
+	<a id="addbutton" class="btn btn-danger">Add Text</a>
+	<a id="typingeffect" class="btn btn-warning">Add Text</a>
+	<a id="trial" onclick="typeWriterHelper()" class="btn btn-success">Trial</a>
+	<h1 id="testheader"></h1>
+</div>
+<script>
+	var speed = 1;
+	var txt = "Let's try to make a typing effect";
+	function typeWriter(x) {
+		console.log("x = " + x);
+		document.getElementById("testheader").innerHTML += txt.charAt(x);
+	}
+	function typeWriterHelper() {
+		console.log(txt.length);
+		for (i = 0; i < txt.length; ++i) {
+			console.log(txt.charAt(i));
+			// This shit does not work at all
+			setTimeout(function(){  document.getElementById("testheader").innerHTML += txt.charAt(i); }, 2000);
+		}
+	}
+</script>
+{% endblock %}
