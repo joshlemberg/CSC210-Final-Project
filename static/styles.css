@@ -1,0 +1,5 @@
+body { padding-top: 70px; }
+
+.navbar {
+    transition: all 0.4s;
+}

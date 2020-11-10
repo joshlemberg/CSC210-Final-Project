@@ -20,4 +20,12 @@ $(document).ready(function() {
 		$("#testheader").html("This is a test");; // Uses jQuery selector :hidden, referenced from https://api.jquery.com/hidden-selector/, and .first() referenced from https://api.jquery.com/first-selector/
 		return false;
 	});
+
+    $(window).on('scroll', function () {
+        if ( $(window).scrollTop() > 10 ) {
+            $('#navigation').css('background', 'white');
+        } else {
+            $('#navigation').css('background', 'black');
+        }
+    });
 });
