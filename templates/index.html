@@ -38,22 +38,4 @@
 	Sed vel risus quis augue mollis convallis. Aliquam porttitor mi arcu, eu venenatis tellus lobortis ut. In imperdiet massa sit amet neque malesuada, ornare porta lacus suscipit. Phasellus rutrum, urna rutrum finibus faucibus, odio lectus placerat risus, in euismod odio lorem quis dolor. In pharetra hendrerit urna, ut porttitor ligula fringilla vitae. In vehicula neque ut ligula lobortis mollis. Suspendisse luctus sapien purus, vitae ullamcorper massa fermentum interdum. Sed varius leo eu nulla finibus, at malesuada metus faucibus. Integer purus erat, pretium at dolor at, egestas lobortis nulla. Duis eget lorem in magna ultricies efficitur vel eu urna. Etiam interdum diam sed tortor pellentesque luctus. Morbi malesuada lorem vitae ligula dignissim placerat. Sed imperdiet turpis ut est feugiat pharetra.
 </p>
 
-
-
-<script>
-	var speed = 1;
-	var txt = "Let's try to make a typing effect";
-	function typeWriter(x) {
-		console.log("x = " + x);
-		document.getElementById("testheader").innerHTML += txt.charAt(x);
-	}
-	function typeWriterHelper() {
-		console.log(txt.length);
-		for (i = 0; i < txt.length; ++i) {
-			console.log(txt.charAt(i));
-			// This shit does not work at all
-			setTimeout(function(){  document.getElementById("testheader").innerHTML += txt.charAt(i); }, 2000);
-		}
-	}
-</script>
 {% endblock %}
