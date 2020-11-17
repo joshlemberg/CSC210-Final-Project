@@ -32,9 +32,11 @@
                 <li><a href="{{ url_for('auth.signup') }}"><span class="glyphicon glyphicon-plus"></span> Sign Up</a></li>
                 {% endif %}
             </ul>
+            {% if current_user.is_authenticated %}
             <ul class = "nav navbar-nav navbar-right">
-                <li><a><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li><a href="{{ url_for('auth.profile') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
             </ul>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -59,3 +59,8 @@ def resend_confirmation():
     send_email(current_user.email, 'Confirm Your Account', 'auth/email/confirm', user=current_user, token=token)
     flash('A new confirmation email has been sent to you.')
     return redirect(url_for('main.index'))
+
+@auth.route('/profile')
+@login_required
+def profile():
+    return render_template('auth/profile.html')
