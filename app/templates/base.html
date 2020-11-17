@@ -20,16 +20,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">CSC 210 Final Project</a>
+            <a class="navbar-brand" href="/">Shape Shack</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
                 {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                <li><a href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-off"></span> Log Out</a></li>
                 {% else %}
-                <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                <li><a href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-check"></span> Log In</a></li>
+                <li><a href="{{ url_for('auth.signup') }}"><span class="glyphicon glyphicon-plus"></span> Sign Up</a></li>
                 {% endif %}
+            </ul>
+            <ul class = "nav navbar-nav navbar-right">
+                <li><a><span class="glyphicon glyphicon-user"></span> Profile</a></li>
             </ul>
         </div>
     </div>

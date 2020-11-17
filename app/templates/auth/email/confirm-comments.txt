@@ -1,0 +1,7 @@
+** Comments can't be put in txt files, so this file is going to be used for additional comments **
+
+
+
+{{ url_for('auth.confirm', token=token, _external=True) }}
+yields the url for auth.confirm ('/auth/confirm/<token>') with the <token> being token. 
+Also, this is a relative path so _external knows to add the rest at the beginning.
