@@ -2,8 +2,10 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block page_content %}
-    <h1>Login Form</h1>
-    <div class="well">
+<body>
+	<div class="container">
+    	<h1>Login Form</h1>
         {{ wtf.quick_form(form) }}
-    </div>
+	</div>	
+</body>
 {% endblock page_content %}
