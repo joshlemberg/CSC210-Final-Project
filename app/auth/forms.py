@@ -33,5 +33,17 @@ class SignUpForm(FlaskForm):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('That username has already been taken.')
 
+class ChangePasswordForm(FlaskForm):
+    oldPassword = PasswordField('Old Password', validators=[DataRequired('Old Password is required.')])
+    newPassword = PasswordField('New Password', validators=[DataRequired('New Password is required.'), EqualTo('newPasswordConfirm', message="New Password Fields must match.")])
+    newPasswordConfirm = PasswordField('Confirm Your New Password', validators=[DataRequired('New Password confirmation is required.')])
+    submit = SubmitField('Update Password')
+
+class ChangeUsernameForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired('Password is required.')])
+    newUsername = StringField('New Username', validators=[DataRequired('New Username is required.'), EqualTo('newUsernameConfirm', message="New Username Fields must match.")])
+    newUsernameConfirm = StringField('Confirm Your New Username', validators=[DataRequired('New Username confirmation is required.')])
+    submit = SubmitField('Update Username')
+
 
 
