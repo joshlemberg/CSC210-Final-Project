@@ -6,6 +6,7 @@
 import os
 from app.models import User, Role
 from app import create_app, db
+from flask import Flask, request, url_for, redirect, render_template
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default') 
 
@@ -19,6 +20,22 @@ def test():
 	import unittest
 	tests = unittest.TestLoader().discover('tests') 
 	unittest.TextTestRunner(verbosity=2).run(tests)
+
+@app.route('/ladylog')
+def ladylog():
+	return render_template('ladylog.html')
+
+@app.route('/fish')
+def fish():
+	return render_template('fish.html')
+
+@app.route('/glider')
+def glider():
+	return render_template('glider.html')
+
+@app.route('/noserider')
+def noserider():
+	return render_template('noserider.html')
 
 # basedir = os.path.abspath(os.path.dirname(__file__))
 
