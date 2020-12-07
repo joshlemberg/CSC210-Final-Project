@@ -3,13 +3,71 @@
 
 {% block page_content %}
 <div class="container">
-	<h2 class="jumbotron text-center">The Fish</h2>
+	<h2 class="jumbotron text-center" style="opacity: 90%;">The Fish</h2>
 	<div class="text-center">
-		<img src="/static/images/fish.jpg" alt="Girl in a jacket" width="500" height="600">
+		<img src="/static/images/fish.jpg" alt="Girl in a jacket" width="500" height="600" style="border-radius: 10px">
 	</div>
 	<h4>Style packed with volume</h4>
 	<p>
 		The fish is a small board packed with volume. This allows for easy paddling on smaller days and provides a flowing feel while surfing down the line. Traditionally, these boards are ridden with twin keel fins that allow for wide arching turns on the face of the wave. However, more modern fish boards have been designed with quad fins, allowing more hold in turns and adding more performance and responsiveness to the board to be ridden in bigger waves. These boards can be ridden in all sorts of conditions and are enjoyed by any surfer looking for an alternative board.
 	</p>
+</div>
+
+<h2>Reviews!</h2>
+
+<ul class="posts">
+	{% for review in reviews %}
+	<li class="post">
+		<div class="post-author">
+			Author - {{ review.author.username }}
+		</div>
+		<div>
+			{{ review.timestamp.date() }}
+		</div>
+		<div>
+			{{ review.review }}
+		</div>
+		{% if current_user == review.author %}
+		<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal{{review.id}}">Edit</a>
+		<a href="/fishdelete/{{review.id}}" class="btn btn-danger btn-s" onclick="return confirm('Are you sure you want to delete this review? This cannot be undone.')">Delete</a>
+		{% endif %}
+	</li>
+
+	<div class="modal fade" id="editModal{{review.id}}" role="dialog" style="opacity: 100%;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				 <div class="modal-header">
+					 <h2>Edit Your Comment</h2>
+				 </div>
+				 <div class="modal-body">
+					 
+					 <form action="/fishedit/{{review.id}}" method="POST">
+						{{ form.hidden_tag() }}
+						<!-- Form rendering referenced from WTForms documentation -->
+						<!-- help from https://stackoverflow.com/questions/19645028/passing-a-value-to-wtforms-field-with-jinja2/19645147 -->
+						<div class="form-group">
+							{{form.body.label}} <br>
+							{{form.body(class_="form-control", value=review.review)}}
+						</div>
+						<br/>
+						<p>
+							{{form.submit(class_="btn btn-primary")}}
+						</p>
+					</form>
+
+				 </div>
+				 <div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  </div>
+			</div>
+		</div>
+	</div>
+		
+	{% endfor %}
+
+</ul>
+
+<div>
+    {{ wtf.quick_form(form) }}
 </div>
 {% endblock %}

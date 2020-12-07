@@ -2,6 +2,7 @@
 # FIXME not sure what to import
 from . import db, login_manager
 from flask import current_app
+from datetime import datetime
 
 class Role(db.Model):
 	__tablename__ = 'roles'
@@ -9,6 +10,34 @@ class Role(db.Model):
 	name = db.Column(db.String(64), unique=True)
 	def __repr__(self):
 		return '<Role %r>' % self.name
+
+class Glider(db.Model):
+	__tablename__ = 'glider'
+	id = db.Column(db.Integer, primary_key=True)
+	review = db.Column(db.Text)
+	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+class Fish(db.Model):
+	__tablename__ = 'fish'
+	id = db.Column(db.Integer, primary_key=True)
+	review = db.Column(db.Text)
+	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+class Ladylog(db.Model):
+	__tablename__ = 'ladylog'
+	id = db.Column(db.Integer, primary_key=True)
+	review = db.Column(db.Text)
+	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+class Noserider(db.Model):
+	__tablename__ = 'noserider'
+	id = db.Column(db.Integer, primary_key=True)
+	review = db.Column(db.Text)
+	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -22,6 +51,10 @@ class User(UserMixin, db.Model):
 	password_hash = db.Column(db.String(128))
 	role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 	confirmed = db.Column(db.Boolean, default=False) # Has the account been confirmed by email?
+	glider_reviews = db.relationship('Glider', backref='author', lazy='dynamic')
+	fish_reviews = db.relationship('Fish', backref='author', lazy='dynamic')
+	noserider_reviews = db.relationship('Noserider', backref='author', lazy='dynamic')
+	ladylog_reviews = db.relationship('Ladylog', backref='author', lazy='dynamic')
 
 	@property
 	def password(self):

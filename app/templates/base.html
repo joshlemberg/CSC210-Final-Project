@@ -43,8 +43,27 @@
 {% endblock %}
 
 {% block content %}
+<style>
+	/* Style the video: 100% width and height to cover the entire window */
+	#myVideo {
+	  position: fixed;
+	  right: 0;
+	  bottom: 0;
+	  min-width: 100%; 
+	  min-height: 100%;
+	  z-index: -1;
+	}
+
+	#hello-jumbotron{
+		opacity: 90%;
+	}
+</style>
 <!-- Error message flashing referenced from Miguel Grinberg book -->
 <div class="container">
+    <video id="myVideo" preload="auto" autoplay="true" loop="loop" muted="muted">
+		<source src="/static/waves.mp4" type="video/mp4">
+		Video not supported
+    </video>    
     {% for message in get_flashed_messages() %}
     <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -56,3 +75,7 @@
 </div>
 {% endblock %}
 
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
