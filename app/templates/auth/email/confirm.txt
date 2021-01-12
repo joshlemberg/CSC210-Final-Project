@@ -1,0 +1,9 @@
+Hey {{ user.username }}!!
+
+Thanks for creating a Shape Shack account with us!
+
+To confirm your account, navigate to the following link:
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+Thanks!
+The Shape Shack Team

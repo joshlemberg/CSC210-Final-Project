@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+<style>
+	/* Style the video: 100% width and height to cover the entire window */
+	#myVideo {
+	  position: fixed;
+	  right: 0;
+	  bottom: 0;
+	  min-width: 100%; 
+	  min-height: 100%;
+	  z-index: -1;
+	}
+
+	#hello-jumbotron{
+		opacity: 90%;
+	}
+</style>
+
+<video id="myVideo" preload="auto" autoplay="true" loop="loop" muted="muted">
+		<source src="/static/waves.mp4" type="video/mp4">
+		Video not supported
+</video>
+
+<div class="content">
+	<div class="jumbotron text-center" id="hello-jumbotron">
+		{% if current_user.is_authenticated %}
+			<h1>Hello, {{ current_user.username }}</h1>
+		{% else %}
+			<h1>Hello, Stranger</h1>
+		{% endif %}
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="column">
+				<a href="{{ url_for('main.ladylog')}}">
+				<img src="/static/images/picture.jpg" alt="Girl in a jacket" width="550" height="600" class="image" style="border-radius: 10px">
+				<div class="middle">
+					<div class="text">LadyLog</div>
+				</div>
+			</div>
+			<div class="column">
+				<a href="{{ url_for('main.fish')}}">
+				<img src="/static/images/fish.jpg" alt="yellow board" width="550" height="600" class="image" style="border-radius: 10px">
+				<div class="middle">
+					<div class="text">Fish</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="column">
+				<a href="{{ url_for('main.glider')}}">
+				<img src="/static/images/glider.jpg" alt="Girl in a jacket" width="550" height="600" style="border-radius: 10px">
+			</div>
+			<div class="column">
+				<a href="{{ url_for('main.noserider')}}">
+				<img src="/static/images/noserider.png" alt="Girl in a jacket" width="550" height="600" style="border-radius: 10px">
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+
+<h2 class="jumbotron text-center" style="opacity: 90%;">The Noserider</h2>
+<div class="text-center">
+	<img src="/static/images/noserider.png" alt="Girl in a jacket" width="500" height="600" style="border-radius: 10px">
+</div>
+<h2>The Traditional</h2>
+	<p style="background-color: white; padding: 20px; opacity: 80%;">
+		Noseriding is something all longboarders pursue. These boards help them achieve it. With their large concave underneath the nose of the board, surfers are able to achieve hang tens as they cruise down the line. These boards also have wide tails that provide hold in the wave allowing the rider to stay perched on the nose as they go through critical sections of the wave. These boards are usually high in density and ridden with a pivot fin as the boards are hard to turn with their high volume and block tails. The pivot fins allows them to perform sweeping bottom turns to set their line as they walk to the nose.
+	</p>
+
+
+
+<h2>Reviews!</h2>
+
+<ul class="posts">
+	{% for review in reviews %}
+	<li class="post" style="background-color: white; opacity: 80%;">
+		<div class="post-author">
+			Author - {{ review.author.username }}
+		</div>
+		<div>
+			{{ review.timestamp.date() }}
+		</div>
+		<div>
+			{{ review.review }}
+		</div>
+		{% if current_user == review.author %}
+		<a class="btn btn-warning btn-s" data-toggle="modal" data-target="#editModal{{review.id}}">Edit</a>
+		<a href="/noseriderdelete/{{review.id}}" class="btn btn-danger btn-s" onclick="return confirm('Are you sure you want to delete this review? This cannot be undone.')">Delete</a>
+		{% endif %}
+	</li>
+
+	<div class="modal fade" id="editModal{{review.id}}" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				 <div class="modal-header">
+					 <h2>Edit Your Comment</h2>
+				 </div>
+				 <div class="modal-body">
+					 
+					 <form action="/noserideredit/{{review.id}}" method="POST">
+						{{ form.hidden_tag() }}
+						<!-- Form rendering referenced from WTForms documentation -->
+						<!-- help from https://stackoverflow.com/questions/19645028/passing-a-value-to-wtforms-field-with-jinja2/19645147 -->
+						<div class="form-group">
+							{{form.body.label}} <br>
+							{{form.body(class_="form-control", value=review.review)}}
+						</div>
+						<br/>
+						<p>
+							{{form.submit(class_="btn btn-primary")}}
+						</p>
+					</form>
+
+				 </div>
+				 <div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  </div>
+			</div>
+		</div>
+	</div>
+		
+	{% endfor %}
+
+</ul>
+
+<div>
+    {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}
